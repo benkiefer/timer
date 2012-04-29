@@ -18,12 +18,12 @@ public class RepositoryImplTest {
     private Repository repository;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         repository.deleteAll();
     }
 
     @Test
-    public void save(){
+    public void save() {
         Movie movie = new Movie();
         movie.setTitle("Jaws");
         movie.setWatched(true);
@@ -37,17 +37,17 @@ public class RepositoryImplTest {
     }
 
     @Test
-    public void findAll_returns_emptyList(){
+    public void findAll_returns_emptyList() {
         assertTrue(repository.findAll().isEmpty());
     }
 
     @Test
-    public void findById_returns_null(){
+    public void findById_returns_null() {
         assertNull(repository.findById(200));
     }
 
     @Test
-    public void delete(){
+    public void delete() {
         Movie movie = new Movie();
         movie.setTitle("Jaws");
         repository.save(movie);
@@ -66,6 +66,30 @@ public class RepositoryImplTest {
         Movie foundMovie = (Movie) results2.get(0);
         assertEquals(foundMovie.getTitle(), "Jaws 2");
         assertFalse(foundMovie.isWatched());
+    }
+
+    @Test
+    public void markAsWatched() {
+        Movie movie = new Movie();
+        movie.setTitle("Jaws");
+        movie.setWatched(false);
+
+        Movie movie2 = new Movie();
+        movie2.setTitle("Jaws 2");
+        movie2.setWatched(false);
+
+        repository.save(movie);
+        repository.save(movie2);
+
+        repository.markAsWatched();
+
+        List results = repository.findAll();
+        assertEquals(results.size(), 2);
+
+        for (Object result : results) {
+            Movie myMovie = (Movie) result;
+            assertTrue(myMovie.isWatched());
+        }
     }
 
     public void setRepository(Repository repository) {

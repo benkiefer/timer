@@ -44,6 +44,11 @@ public class RepositoryImpl implements Repository {
         hibernateTemplate.bulkUpdate("delete from Movie");
     }
 
+    @Override
+    public void markAsWatched(){
+        hibernateTemplate.bulkUpdate("update Movie set watched = true");
+    }
+
     @Autowired
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;

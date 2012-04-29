@@ -8,5 +8,6 @@ public interface Repository {
     public Movie findById(long id);
     public List findAll();
     public void deleteAll();
+    public void markAsWatched();
     
 }
