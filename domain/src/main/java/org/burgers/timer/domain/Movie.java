@@ -6,6 +6,12 @@ import java.io.Serializable;
 @Entity
 @Table(name = "tbtMovie")
 public class Movie implements Serializable {
+    public Movie(){ }
+    public Movie(String title, boolean watched){
+        this.title = title;
+        this.watched = watched;
+    }
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

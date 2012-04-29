@@ -31,9 +31,9 @@ public class WatchedMovieJobTest {
 
     @Test
     public void run(){
-        saveUnwatchedMovie("Jaws");
-        saveUnwatchedMovie("Jaws 2");
-        saveUnwatchedMovie("Jaws 3");
+        repository.save(new Movie("Jaws", false));
+        repository.save(new Movie("Jaws 2", false));
+        repository.save(new Movie("Jaws 3", false));
 
         watchedMovieJob.run();
 
@@ -44,14 +44,6 @@ public class WatchedMovieJobTest {
             assertTrue(myMovie.isWatched());
         }
     }
-
-    private void saveUnwatchedMovie(String title){
-        Movie movie = new Movie();
-        movie.setTitle(title);
-        movie.setWatched(false);
-        repository.save(movie);
-    }
-
 
     public void setWatchedMovieJob(WatchedMovieJob watchedMovieJob) {
         this.watchedMovieJob = watchedMovieJob;

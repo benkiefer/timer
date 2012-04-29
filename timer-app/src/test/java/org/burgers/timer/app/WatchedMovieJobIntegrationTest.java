@@ -15,6 +15,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:contexts/TimerContext.xml"})
@@ -32,9 +33,9 @@ public class WatchedMovieJobIntegrationTest {
 
     @Test
     public void run() throws InterruptedException {
-        saveUnwatchedMovie("Jaws");
-        saveUnwatchedMovie("Jaws 2");
-        saveUnwatchedMovie("Jaws 3");
+        repository.save(new Movie("Jaws", false));
+        repository.save(new Movie("Jaws 2", false));
+        repository.save(new Movie("Jaws 3", false));
 
         runnable.run();
 
@@ -45,14 +46,6 @@ public class WatchedMovieJobIntegrationTest {
             assertTrue(myMovie.isWatched());
         }
     }
-
-    private void saveUnwatchedMovie(String title) {
-        Movie movie = new Movie();
-        movie.setTitle(title);
-        movie.setWatched(false);
-        repository.save(movie);
-    }
-
 
     public void setRepository(Repository repository) {
         this.repository = repository;
