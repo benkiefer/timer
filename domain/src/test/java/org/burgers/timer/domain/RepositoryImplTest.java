@@ -1,5 +1,6 @@
 package org.burgers.timer.domain;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,8 +18,8 @@ public class RepositoryImplTest {
     @Autowired
     private Repository repository;
 
-    @Before
-    public void setUp() {
+    @After
+    public void tearDown() {
         repository.deleteAll();
     }
 
