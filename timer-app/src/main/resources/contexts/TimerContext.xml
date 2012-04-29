@@ -13,7 +13,7 @@
     <context:component-scan base-package="org.burgers.timer.app"/>
 
     <task:scheduled-tasks scheduler="myScheduler">
-        <task:scheduled ref="watchedMovieJob" method="run" cron="* * * * * *"/>
+        <task:scheduled ref="watchedMovieJob" method="run" cron="0 10 * * * *"/>
     </task:scheduled-tasks>
 
     <task:scheduler id="myScheduler" pool-size="10"/>

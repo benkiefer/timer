@@ -6,6 +6,8 @@ import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.scheduling.support.ScheduledMethodRunnable;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -17,6 +19,9 @@ import static org.junit.Assert.assertTrue;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:contexts/TimerContext.xml"})
 public class WatchedMovieJobIntegrationTest {
+    @Autowired
+    private ScheduledMethodRunnable runnable;
+
     @Autowired
     private Repository repository;
 
@@ -31,7 +36,7 @@ public class WatchedMovieJobIntegrationTest {
         saveUnwatchedMovie("Jaws 2");
         saveUnwatchedMovie("Jaws 3");
 
-        Thread.sleep(3000);
+        runnable.run();
 
         List results = repository.findAll();
         assertEquals(results.size(), 3);
@@ -51,5 +56,9 @@ public class WatchedMovieJobIntegrationTest {
 
     public void setRepository(Repository repository) {
         this.repository = repository;
+    }
+
+    public void setRunnable(ScheduledMethodRunnable runnable) {
+        this.runnable = runnable;
     }
 }
