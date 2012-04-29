@@ -9,9 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:contexts/DomainContext.xml"})
@@ -28,12 +26,14 @@ public class RepositoryImplTest {
     public void save(){
         Movie movie = new Movie();
         movie.setTitle("Jaws");
+        movie.setWatched(true);
         repository.save(movie);
         List results = repository.findAll();
         assertEquals(results.size(), 1);
         Movie foundMovie = (Movie) results.get(0);
         assertTrue(foundMovie.getId() > 0);
         assertEquals(foundMovie.getTitle(), "Jaws");
+        assertTrue(foundMovie.isWatched());
     }
 
     @Test
@@ -65,6 +65,7 @@ public class RepositoryImplTest {
 
         Movie foundMovie = (Movie) results2.get(0);
         assertEquals(foundMovie.getTitle(), "Jaws 2");
+        assertFalse(foundMovie.isWatched());
     }
 
     public void setRepository(Repository repository) {

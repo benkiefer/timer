@@ -15,6 +15,9 @@ public class Movie implements Serializable {
     @Column(name = "Title")
     private String title;
 
+    @Column(name = "Watched")
+    private boolean watched;
+
     public long getId() {
         return id;
     }
@@ -31,4 +34,11 @@ public class Movie implements Serializable {
         this.title = title;
     }
 
+    public boolean isWatched() {
+        return watched;
+    }
+
+    public void setWatched(boolean watched) {
+        this.watched = watched;
+    }
 }
