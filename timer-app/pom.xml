@@ -30,6 +30,7 @@
             <groupId>org.burgers</groupId>
             <artifactId>timer-domain</artifactId>
         </dependency>
+
     </dependencies>
 
     <build>
