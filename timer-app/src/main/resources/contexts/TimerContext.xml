@@ -8,12 +8,15 @@
        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd"
        >
 
+
+    <context:property-placeholder location="classpath:env.properties" />
+
     <import resource="classpath:contexts/DomainContext.xml"/>
 
     <context:component-scan base-package="org.burgers.timer.app"/>
 
     <task:scheduled-tasks scheduler="myScheduler">
-        <task:scheduled ref="watchedMovieJob" method="run" cron="0 10 * * * *"/>
+        <task:scheduled ref="watchedMovieJob" method="run" cron="${timer.app.chron.expression}"/>
     </task:scheduled-tasks>
 
     <task:scheduler id="myScheduler" pool-size="10"/>
