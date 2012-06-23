@@ -6,6 +6,7 @@
         <artifactId>timer</artifactId>
         <groupId>org.burgers</groupId>
         <version>1.0</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -22,7 +23,7 @@
             <dependency>
                 <groupId>org.burgers</groupId>
                 <artifactId>timer-domain</artifactId>
-                <version>${version}</version>
+                <version>${project.version}</version>
             </dependency>
 
             <dependency>
